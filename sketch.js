@@ -18,6 +18,10 @@ function setup(){
 
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
+    bourder = new Ground(0,200,50,650);
+    bourder1 = new Ground(1200,200,50,650);
+    bourder2 = new Ground(600,0,1300,50)
+
 
     box1 = new Box(700,320,70,70);
     box2 = new Box(920,320,70,70);
@@ -35,15 +39,19 @@ function setup(){
     log5 = new Log(870,120,150, -PI/7);
 
     bird = new Bird(100,100);
+    
+    string = new Chain(bird.body , {x: 200 , y: 100});
+
+    
 
 }
 
 function draw(){
     background(backgroundImg);
     Engine.update(engine);
-    console.log(box2.body.position.x);
-    console.log(box2.body.position.y);
-    console.log(box2.body.angle);
+   // console.log(box2.body.position.x);
+   // console.log(box2.body.position.y);
+   // console.log(box2.body.angle);
     box1.display();
     box2.display();
     ground.display();
@@ -60,5 +68,14 @@ function draw(){
     log5.display();
 
     bird.display();
+    
+    string.display();
     platform.display();
+}
+
+function mouseDragged(){
+  Matter.Body.setPosition(bird.body, {x:mouseX , y:mouseY})
+}
+function mouseReleased(){
+    string.fly();
 }
